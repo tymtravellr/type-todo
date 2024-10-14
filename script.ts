@@ -1,11 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
     const todoList = document.querySelector('.todo-list');
+    const triggerBtn = document.querySelector('.trigger-btn');
     const addBtn = document.querySelector('.add-btn');
-    const insertBtn = document.querySelector('.insert-btn');
+    const addTodo = document.querySelector('.add-todo');
+    const todoInput = document.querySelector('.todo-input') as HTMLInputElement;
+    const todoItem = document.querySelectorAll('.todo-item');
+    const emptyMessage = document.querySelector('.empty-list-message');
+    const todoDay = document.querySelector('.todo-day') as HTMLDivElement;
+    const todoDate = document.querySelector('.todo-date') as HTMLDivElement;
 
-    //Create a todo item
-    const createTodoItem = (): void => {
-        console.log('hi')
+    const days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    ];
+
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ]
+
+    const addClickListenerToTodoItem = (item: Element): void => {
+        item.addEventListener('click', () => {
+            completedTodo(item);
+        });
+    };
+
+    //Add a todo item
+    const addTodoItem = (): void => {
+
         //Step: 1 - create necesseary elements for a todo item
         let todoItem = document.createElement('li');
         let todoText = document.createElement('p');
@@ -20,11 +57,64 @@ document.addEventListener('DOMContentLoaded', () => {
         todoItem.appendChild(todoText);
         todoItem.appendChild(todoStatusIndicator);
 
+        //step: 4 - insert text from input
+        if (todoInput) {
+            todoText.innerHTML = todoInput?.value;
+        }
+
         //Step: 4 - insert todo item into todo list
-        todoList?.appendChild(todoItem)
+        if (todoList && todoInput) {
+            todoList.appendChild(todoItem);
+            todoInput.value = '';
+            addClickListenerToTodoItem(todoItem); // Add click listener to new item
+        }
+        renderEmptyListText();
     }
 
-    addBtn?.addEventListener('click', () => {
-        createTodoItem()
-    })
+    const triggerTodoInput = (): void => {
+        addTodo?.classList.toggle('hidden');
+        triggerBtn?.classList.toggle('input-shown');
+        if (triggerBtn) {
+            if (triggerBtn.classList.contains('input-shown')) {
+                triggerBtn.textContent = "Cancel";
+            } else {
+                triggerBtn.textContent = "+ New Todo";
+            }
+        }
+    }
+
+    const completedTodo = (item: Element): void => {
+        item?.classList.toggle('completed');
+    }
+
+    const getDate = () => {
+        const day = days[new Date().getDay()];
+        const date = new Date().getDate();
+        const month = months[new Date().getMonth()];
+        const year = new Date().getFullYear();
+        return { day, date, month, year }
+    }
+
+    const renderEmptyListText = (): void => {
+        if (todoList && emptyMessage) {
+            if (todoList.children.length === 0) {
+                emptyMessage.classList.remove('hidden');
+            } else {
+                emptyMessage.classList.add('hidden');
+            }
+        }
+
+        todoDay.innerHTML = getDate().day;
+        todoDate.innerHTML = `${getDate().date} ${getDate().month} ${getDate().year}`
+    }
+
+    triggerBtn?.addEventListener('click', triggerTodoInput)
+
+    addBtn?.addEventListener('click', addTodoItem)
+
+    todoItem.forEach((item) => {
+        addClickListenerToTodoItem(item);
+    });
+    
+    renderEmptyListText()
 })

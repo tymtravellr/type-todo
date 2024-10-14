@@ -19,39 +19,29 @@
 </head>
 
 <body>
-
     <main>
         <section>
             <div class="todo">
                 <div class="todo-head">
-                    <h1 class="todo-day">
-                        Monday
-                    </h1>
+                    <h1 class="todo-day"></h1>
                     <p class="todo-date">
                         January 01, 1970
                     </p>
                 </div>
                 <div class="todo-body">
-                    <ul class="todo-list">
-                        <li class="todo-item">
-                            <p class="todo-text">Design Review</p>
-                            <div class="todo-status-indicator"></div>
-                        </li>
-                    </ul>
+                    <ul class="todo-list"></ul>
+                    <p class="empty-list-message hidden">
+                        No Task Added
+                    </p>
                 </div>
                 <div class="todo-footer">
-                    <button class="add-btn">
+                    <div class="add-todo hidden">
+                        <input type="text" placeholder="Enter your task" class="todo-input">
+                        <button class="add-btn">Add</button>
+                    </div>
+                    <button class="trigger-btn">
                         + New Todo
                     </button>
-                </div>
-            </div>
-            <div class="modal-wrapper">
-                <div class="overlay"></div>
-                <div class="todo-modal">
-                    <div>
-                        <input type="text">
-                        <button>Add</button>
-                    </div>
                 </div>
             </div>
         </section>

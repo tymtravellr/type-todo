@@ -61,12 +61,25 @@ h6 {
         color: #adadad
     }
 
+    &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
     &-item {
         display: flex;
         justify-content: space-between;
         cursor: pointer;
 
+        .todo-text {
+            font-size: 16px;
+            color: #000;
+            transition: all 0.3s ease-in-out;
+        }
+
         &.completed {
+
             .todo-text {
                 font-size: 14px;
                 color: #adadad;
@@ -87,14 +100,57 @@ h6 {
 
         border: none;
         border-radius: 100%;
+
+        transition: all 0.3s ease-in-out;
     }
 
     /* ----- TODO FOOTER ----- */
     &-footer {
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
     }
 
-    .add-btn {
+    .trigger-btn {
+        background-color: #23c790;
+        padding: 12px 32px;
+
+        border: none;
+        border-radius: 6px;
+
+        font-family: 'Inter', sans;
+        font-weight: 500;
+        color: #fff;
+
+        cursor: pointer;
+
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+            background-color: #22956f;
+        }
+
+        &.input-shown {
+            background-color: #f52121;
+        }
+    }
+}
+
+.add-todo {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #e4e4e4;
+        border-radius: 6px;
+    }
+
+    button {
         background-color: #23c790;
         padding: 12px 32px;
 
@@ -115,4 +171,8 @@ h6 {
     }
 }
 
-/* ----- MODAL ----- */
+/* ----- UTILITY CLASSES ----- */
+
+.hidden {
+    display: none;
+}
