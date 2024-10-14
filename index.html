@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type TODO</title>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="./css/style.css">
+
+</head>
+
+<body>
+
+    <main>
+        <section>
+            <div class="todo">
+                <div class="todo-head">
+                    <h1 class="todo-day">
+                        Monday
+                    </h1>
+                    <p class="todo-date">
+                        January 01, 1970
+                    </p>
+                </div>
+                <div class="todo-body">
+                    <ul class="todo-list">
+                        <li class="todo-item">
+                            <p class="todo-text">Design Review</p>
+                            <div class="todo-status-indicator"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="todo-footer">
+                    <button class="add-btn">
+                        + New Todo
+                    </button>
+                </div>
+            </div>
+            <div class="modal-wrapper">
+                <div class="overlay"></div>
+                <div class="todo-modal">
+                    <div>
+                        <input type="text">
+                        <button>Add</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- SCRIPTS -->
+    <script src="./script/script.js"></script>
+</body>
+
+</html>
