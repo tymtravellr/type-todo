@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const todoList = document.querySelector('.todo-list');
-    const triggerBtn = document.querySelector('.trigger-btn');
-    const addBtn = document.querySelector('.add-btn');
+    const todoList = document.querySelector<HTMLUListElement>('.todo-list');
+    const triggerBtn = document.querySelector<HTMLButtonElement>('.trigger-btn');
+    const addBtn = document.querySelector<HTMLButtonElement>('.add-btn');
     const addTodo = document.querySelector('.add-todo');
-    const todoInput = document.querySelector('.todo-input') as HTMLInputElement;
+    const todoInput = document.querySelector<HTMLInputElement>('.todo-input');
     const todoItem = document.querySelectorAll('.todo-item');
     const emptyMessage = document.querySelector('.empty-list-message');
-    const todoDay = document.querySelector('.todo-day') as HTMLDivElement;
-    const todoDate = document.querySelector('.todo-date') as HTMLDivElement;
+    const todoDay = document.querySelector<HTMLHeadingElement>('.todo-day');
+    const todoDate = document.querySelector<HTMLParagraphElement>('.todo-date');
 
     const days = [
         "Sunday",
@@ -87,7 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
         item?.classList.toggle('completed');
     }
 
-    const getDate = () => {
+    const getDate = (): {
+        day: string,
+        date: number,
+        month: string,
+        year: number
+    } => {
         const day = days[new Date().getDay()];
         const date = new Date().getDate();
         const month = months[new Date().getMonth()];
@@ -103,9 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 emptyMessage.classList.add('hidden');
             }
         }
-
-        todoDay.innerHTML = getDate().day;
-        todoDate.innerHTML = `${getDate().date} ${getDate().month} ${getDate().year}`
+        if (todoDay && todoDate) {
+            todoDay.innerHTML = getDate().day;
+            todoDate.innerHTML = `${getDate().date} ${getDate().month} ${getDate().year}`
+        }
     }
 
     triggerBtn?.addEventListener('click', triggerTodoInput)
@@ -115,6 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
     todoItem.forEach((item) => {
         addClickListenerToTodoItem(item);
     });
-    
+
     renderEmptyListText()
 })
